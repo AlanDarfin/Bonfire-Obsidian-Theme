@@ -1,0 +1,55 @@
+name: Publish Bonfire v1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-v1.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bonfire-release-v1
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'AlanDarfin/Bonfire-Obsidian-Theme'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate theme
+        run: |
+          test "$(node -p "require('./manifest.json').version")" = '1.0.0'
+          npm run check
+      - name: Package the installer
+        run: |
+          git archive --format=zip --prefix=Bonfire/ -o Bonfire-1.0.0-instalar.zip "$GITHUB_SHA" \
+            theme.css manifest.json README.md README.en.md examples LICENSE licenses
+          unzip -t Bonfire-1.0.0-instalar.zip
+          sha256sum theme.css manifest.json Bonfire-1.0.0-instalar.zip > SHA256SUMS.txt
+      - name: Publish v1.0.0
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=v1.0.0
+          if existing=$(gh release view "$tag" --repo "$GITHUB_REPOSITORY" --json isDraft,targetCommitish); then
+            test "$(jq -r .targetCommitish <<< "$existing")" = "$GITHUB_SHA"
+            if [[ $(jq -r .isDraft <<< "$existing") == false ]]; then
+              exit 0
+            fi
+          else
+            gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --draft \
+              --title 'Bonfire 1.0.0' --notes-file releases/v1.0.0.md
+          fi
+          gh release upload "$tag" --repo "$GITHUB_REPOSITORY" --clobber \
+            theme.css manifest.json Bonfire-1.0.0-instalar.zip SHA256SUMS.txt
+          gh release edit "$tag" --repo "$GITHUB_REPOSITORY" --draft=false --latest
