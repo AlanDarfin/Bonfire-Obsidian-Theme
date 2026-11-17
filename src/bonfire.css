@@ -1,0 +1,316 @@
+/* Bonfire uses Obsidian's native layout. Rose inks come from Alan's cores.css. */
+body.theme-dark {
+  --bonfire-canvas: #240f16;
+  --bonfire-panel: #32141e;
+  --bonfire-card: #3b1825;
+  --bonfire-surface-raised: #461628;
+  --bonfire-selection: #65293e;
+  --bonfire-line: #461628;
+  --bonfire-story-border: #8f3856;
+  --bonfire-control-border: #a75270;
+  --bonfire-action: #d67a9c;
+  --bonfire-action-hsl: 337.83, 52.87%, 65.88%;
+  --bonfire-link: #ffbdd4;
+  --bonfire-ink: #f1e6df;
+  --bonfire-muted: #e2cfd0;
+  --bonfire-dim: #c7aab0;
+  --bonfire-on-accent: #240f16;
+  --bonfire-search-tint: #65293e;
+  --bonfire-search-ink: #fff3f7;
+  --bonfire-mark: #ffbdd4;
+  --bonfire-highlight-ink: #240f16;
+  --bonfire-story-surface: #461628;
+  --bonfire-action-hover: #ffbdd4;
+}
+
+body.theme-light {
+  --bonfire-canvas: #faf6ee;
+  --bonfire-panel: #eee6db;
+  --bonfire-card: #f4ede1;
+  --bonfire-surface-raised: #eadbce;
+  --bonfire-selection: #edd9dd;
+  --bonfire-line: #e2d3c8;
+  --bonfire-story-border: #a16a79;
+  --bonfire-control-border: #8a685c;
+  --bonfire-action: #813448;
+  --bonfire-action-hsl: 344.42, 42.54%, 35.49%;
+  --bonfire-link: #732744;
+  --bonfire-ink: #332923;
+  --bonfire-muted: #58483f;
+  --bonfire-dim: #6a534b;
+  --bonfire-on-accent: #fff6eb;
+  --bonfire-search-tint: #edd9dd;
+  --bonfire-search-ink: #592035;
+  --bonfire-mark: #edd9dd;
+  --bonfire-highlight-ink: #542638;
+  --bonfire-story-surface: #f0dfe1;
+  --bonfire-action-hover: #6e243b;
+}
+
+body:is(.theme-dark, .theme-light) {
+  --color-base-00: var(--bonfire-canvas);
+  --color-base-05: var(--bonfire-panel);
+  --color-base-10: var(--bonfire-panel);
+  --color-base-20: var(--bonfire-card);
+  --color-base-25: var(--bonfire-surface-raised);
+  --color-base-30: var(--bonfire-line);
+  --color-base-35: var(--bonfire-selection);
+  --color-base-40: var(--bonfire-story-border);
+  --color-base-50: var(--bonfire-control-border);
+  --color-base-60: var(--bonfire-dim);
+  --color-base-70: var(--bonfire-muted);
+  --color-base-100: var(--bonfire-ink);
+  --color-accent-hsl: var(--bonfire-action-hsl);
+  --color-accent: var(--bonfire-action);
+  --color-accent-1: var(--bonfire-action-hover);
+  --color-accent-2: var(--bonfire-link);
+  --background-primary: var(--bonfire-canvas);
+  --background-primary-alt: var(--bonfire-card);
+  --background-secondary: var(--bonfire-panel);
+  --background-secondary-alt: var(--bonfire-surface-raised);
+  --background-modifier-hover: var(--bonfire-card);
+  --background-modifier-active-hover: var(--bonfire-selection);
+  --background-modifier-border: var(--bonfire-line);
+  --background-modifier-border-hover: var(--bonfire-control-border);
+  --background-modifier-border-focus: var(--bonfire-action);
+  --background-modifier-form-field: var(--bonfire-canvas);
+  --text-normal: var(--bonfire-ink);
+  --text-muted: var(--bonfire-muted);
+  --text-faint: var(--bonfire-dim);
+  --text-accent: var(--bonfire-link);
+  --text-accent-hover: var(--bonfire-ink);
+  --text-on-accent: var(--bonfire-on-accent);
+  --text-on-accent-inverted: var(--bonfire-on-accent);
+  --text-highlight-bg: var(--bonfire-mark);
+  --text-selection: var(--bonfire-selection);
+  --link-color: var(--bonfire-link);
+  --link-external-color: var(--bonfire-link);
+  --interactive-normal: var(--bonfire-card);
+  --interactive-hover: var(--bonfire-surface-raised);
+  --interactive-accent-hsl: var(--bonfire-action-hsl);
+  --interactive-accent: var(--bonfire-action);
+  --interactive-accent-hover: var(--bonfire-action-hover);
+  --divider-color: var(--bonfire-line);
+  --tab-outline-color: var(--bonfire-line);
+  --titlebar-background: var(--bonfire-panel);
+  --titlebar-background-focused: var(--bonfire-panel);
+  --status-bar-background: var(--bonfire-panel);
+  --status-bar-border-color: transparent;
+  --modal-background: var(--bonfire-panel);
+  --modal-border-color: var(--bonfire-line);
+  --nav-item-color: var(--bonfire-muted);
+  --nav-item-color-active: var(--bonfire-ink);
+  --nav-item-background-active: var(--bonfire-selection);
+  --nav-item-background-hover: var(--bonfire-card);
+  --input-shadow: none;
+  --input-shadow-hover: none;
+  --input-focus-border-color: var(--bonfire-action);
+  --bonfire-heading: var(--bonfire-link);
+  --bonfire-field: var(--bonfire-canvas);
+  --bonfire-display-font: "Coming Soon", "Schoolbell", "Segoe Print", cursive;
+  --bonfire-label-font: "Schoolbell", "Coming Soon", "Segoe Print", cursive;
+  --bonfire-prose-font: "Copse", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --bonfire-sketch-radius: 7px 12px 8px 11px / 11px 7px 12px 8px;
+}
+
+.search-result-file-matched-text {
+  padding: 0;
+  border-radius: 2px;
+  color: var(--bonfire-search-ink);
+  background-color: var(--bonfire-search-tint);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-faint);
+  opacity: 1;
+}
+
+:where(input:is([type="text"], [type="search"], [type="url"], [type="number"], [type="password"]), textarea, select):focus-visible {
+  outline: 2px solid var(--bonfire-action);
+  outline-offset: 1px;
+}
+
+/* Keep the settings text on a quiet surface instead of a filled accent row. */
+.setting-item.style-settings-heading {
+  color: var(--text-normal);
+  border-color: transparent;
+}
+
+.setting-item.style-settings-heading:is(:hover, :focus-within) {
+  background: var(--bonfire-card);
+  color: var(--text-normal);
+}
+
+.setting-item.style-settings-heading .setting-item-name {
+  color: var(--text-normal);
+}
+
+.style-settings-heading[data-id="bonfire-theme"] + .style-settings-container {
+  border-inline-start-color: transparent;
+}
+
+.modal.mod-settings .modal-title::after {
+  content: var(--bonfire-version-label);
+  display: inline-block;
+  margin-inline-start: 0.55em;
+  color: var(--text-muted);
+  font-size: 0.68em;
+  white-space: nowrap;
+}
+
+body:not(.bonfire-plain-headings) :is(.markdown-preview-view, .markdown-source-view.mod-cm6) {
+  --h1-font: var(--bonfire-display-font);
+  --h2-font: var(--bonfire-display-font);
+  --h3-font: var(--bonfire-display-font);
+  --h4-font: var(--bonfire-display-font);
+  --h5-font: var(--bonfire-label-font);
+  --h6-font: var(--bonfire-label-font);
+  --h1-weight: 400;
+  --h2-weight: 400;
+  --h3-weight: 400;
+  --h4-weight: 400;
+  --h5-weight: 400;
+  --h6-weight: 400;
+}
+
+body:not(.bonfire-plain-headings) .inline-title {
+  font-family: var(--bonfire-display-font);
+  font-weight: 400;
+  color: var(--bonfire-heading);
+  line-height: 1.24;
+}
+
+body.bonfire-serif-notes :is(.markdown-preview-view, .markdown-source-view.mod-cm6),
+:is(.markdown-preview-view, .markdown-source-view.mod-cm6).bonfire-manuscript {
+  --font-text-theme: var(--bonfire-prose-font);
+  --font-text: var(--bonfire-prose-font);
+  --line-height-normal: 1.68;
+  --p-spacing: .85em;
+}
+
+.markdown-rendered mark,
+.markdown-source-view.mod-cm6 .cm-highlight {
+  color: var(--bonfire-highlight-ink);
+  background: var(--bonfire-mark);
+}
+
+.theme-dark .callout:is([data-callout="scene"], [data-callout="cena"]) {
+  --callout-color: 214, 122, 156;
+}
+
+.theme-light .callout:is([data-callout="scene"], [data-callout="cena"]) {
+  --callout-color: 135, 77, 25;
+}
+
+.callout:is([data-callout="scene"], [data-callout="cena"]) {
+  --callout-icon: lucide-clapperboard;
+}
+
+.callout:is([data-callout="character"], [data-callout="personagem"]) {
+  --callout-icon: lucide-users;
+}
+
+.theme-dark .callout:is([data-callout="character"], [data-callout="personagem"]) {
+  --callout-color: 232, 164, 176;
+}
+
+.theme-light .callout:is([data-callout="character"], [data-callout="personagem"]) {
+  --callout-color: 124, 54, 75;
+}
+
+.callout:is([data-callout="revision"], [data-callout="revisao"]) {
+  --callout-icon: lucide-pen-line;
+}
+
+.theme-dark .callout:is([data-callout="revision"], [data-callout="revisao"]) {
+  --callout-color: 165, 202, 176;
+}
+
+.theme-light .callout:is([data-callout="revision"], [data-callout="revisao"]) {
+  --callout-color: 48, 104, 69;
+}
+
+.bonfire-manuscript :is(hr, .cm-hr hr) {
+  border-style: dashed;
+  border-color: var(--bonfire-line);
+  width: min(7rem, 40%);
+  margin-inline: auto;
+}
+
+body:not(.bonfire-no-sketch) :is(button.mod-cta, .markdown-rendered .callout) {
+  border-radius: var(--bonfire-sketch-radius);
+}
+
+/* Optional ink for the active document tab. Work with native tab layout
+   and avoid adding lines to the mobile switcher. */
+body.bonfire-tab-ink:not(.is-mobile) .workspace .mod-root
+  .workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: var(--text-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--bonfire-action);
+  text-underline-offset: 0.21em;
+  text-decoration-thickness: 0.08em;
+}
+
+
+body.is-mobile {
+  --h1-size: 1.85em;
+  --h2-size: 1.55em;
+}
+
+@media (max-width: 1440px), (max-height: 810px) {
+  body:not(.is-mobile):not(.bonfire-roomy-desktop) {
+    --header-height: 34px;
+    --tab-height: 33px;
+  }
+}
+
+/* @settings
+name: Bonfire
+id: bonfire-theme
+collapsed: false
+settings:
+  -
+    id: bonfire-tab-ink
+    title: Tinta na aba ativa · Active tab ink
+    description: Destaca a aba atual no desktop, com um sublinhado curto no título. Underlines the active document title on desktop.
+    type: class-toggle
+    default: false
+  -
+    id: bonfire-plain-headings
+    title: Títulos sem manuscrita · Plain headings
+    type: class-toggle
+    default: false
+  -
+    id: bonfire-no-sketch
+    title: Superfícies lisas · Plain surfaces
+    description: Remove o rabisco da home e usa cantos regulares nos botões e caixas literárias. Removes the home ink stroke and uses regular corners.
+    type: class-toggle
+    default: false
+  -
+    id: bonfire-serif-notes
+    title: Fonte do blog também no editor · Blog font in the editor
+    description: Aplica Copse à edição, além da leitura. Use Copse in the editor as well as in Reading view.
+    type: class-toggle
+    default: false
+  -
+    id: bonfire-plain-prose
+    title: Prosa com a fonte do Obsidian · Use Obsidian's prose font
+    description: Desliga Copse na leitura de notas comuns. Disable Copse in ordinary notes.
+    type: class-toggle
+    default: false
+  -
+    id: bonfire-literary-notes
+    title: Prosa literária · Literary prose
+    description: Recuo e justificação na leitura. Indents and justifies narrative paragraphs in Reading view.
+    type: class-toggle
+    default: false
+  -
+    id: bonfire-roomy-desktop
+    title: Barras mais altas no desktop · Roomier desktop chrome
+    type: class-toggle
+    default: false
+*/

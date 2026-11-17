@@ -1,0 +1,64 @@
+/* Mobile chrome: keep real scroll space above Android system controls.
+   Some Android WebViews report both safe-area values as zero. */
+body.is-mobile {
+  --bonfire-device-bottom: max(
+    2.75rem, var(--safe-area-inset-bottom, 0px), env(safe-area-inset-bottom, 0px)
+  );
+  --bonfire-settings-clearance: calc(var(--bonfire-device-bottom) + 1.25rem);
+  --bonfire-reader-clearance: calc(var(--bonfire-device-bottom) + 1rem);
+}
+
+body.is-mobile:not(.is-hidden-nav) {
+  --bonfire-reader-clearance: calc(var(--bonfire-device-bottom) + 3.75rem);
+}
+
+body.is-mobile:not(.is-hidden-nav):has(.writer-mobile-status:not([hidden])) {
+  --bonfire-reader-clearance: calc(var(--bonfire-device-bottom) + 5.75rem);
+}
+
+body.is-mobile .modal.mod-settings :is(.vertical-tab-header, .vertical-tab-content),
+body.is-mobile.is-phone .modal.mod-settings :is(.vertical-tab-header, .vertical-tab-content) {
+  padding-block-end: var(--bonfire-settings-clearance);
+  scroll-padding-block-end: var(--bonfire-settings-clearance);
+}
+
+/* Only the last settings group needs a little extra scrollable tail. */
+body.is-mobile.is-phone .modal.mod-settings .vertical-tab-header
+  .vertical-tab-header-group:last-child {
+  padding-block-end: 0.75rem;
+}
+
+body.is-mobile :is(.workspace-drawer, .workspace-drawer-tab-options, .app-container .mobile-navbar) {
+  background-color: var(--bonfire-panel);
+}
+
+body.is-mobile :is(.workspace-drawer-tab-options, .app-container .mobile-navbar) {
+  border-block-color: transparent;
+}
+
+/* When Settings is in front, the underlying app controls cannot intercept
+   input. Leave the OS navigation and the modal's own back/close intact. */
+body.is-mobile:has(.modal-container:not([hidden]) .modal.mod-settings:not([hidden]))
+  .app-container :is(.mobile-navbar, .mobile-toolbar, .writer-mobile-status) {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body.is-mobile .workspace-split.mod-root .workspace-leaf-content[data-type="markdown"]
+  .markdown-reading-view > .markdown-preview-view {
+  padding-block-end: var(--bonfire-reader-clearance);
+  scroll-padding-block-end: var(--bonfire-reader-clearance);
+}
+
+/* Basic supplies a measured reserve when available. Use a floor, not a sum,
+   so the floating bars never add their height twice. */
+body.is-mobile .writer-v8-home {
+  --bonfire-home-footer-floor: var(--bonfire-device-bottom);
+  --bonfire-home-footer: calc(1rem + max(var(--bonfire-home-footer-floor), var(--writer-mobile-home-clearance, 0px)));
+  padding-block-end: var(--bonfire-home-footer);
+  scroll-padding-block-end: var(--bonfire-home-footer);
+}
+
+body.is-mobile:not(.is-hidden-nav):has(.writer-mobile-status-floating:not([hidden])) .writer-v8-home {
+  --bonfire-home-footer-floor: calc(var(--bonfire-device-bottom) + 4.5rem);
+}

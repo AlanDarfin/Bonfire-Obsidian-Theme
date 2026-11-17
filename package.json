@@ -1,0 +1,14 @@
+{
+  "name": "bonfire-obsidian-theme",
+  "version": "0.2.2",
+  "private": true,
+  "description": "An Obsidian reading and writing theme with Bonfire's own palette.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check && node scripts/check-contrast.mjs"
+  }
+}

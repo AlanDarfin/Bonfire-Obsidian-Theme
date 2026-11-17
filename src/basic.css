@@ -1,0 +1,293 @@
+/* Basic 13.15.0. Adapt host surfaces and manuscript compatibility without
+   taking ownership of grid, sidebar order, widget positions, or tab mechanics. */
+body :is(.writer-v8-home, .writer-project-root, .writer-tool-root, .writer-tools-v3,
+  .writer-v11-studio, .dictionary-settings-panel, .writer-v931-pomodoro,
+  .writer-v9-space-sidebar, .writer-v10-bookshelf, .writer-v95-timeline,
+  .writer-v8-chat, .writer-v8-social) {
+  --basic-ui-bg: var(--background-primary);
+  --basic-ui-surface: var(--background-secondary);
+  --basic-ui-accent: var(--interactive-accent);
+  --basic-ui-border: var(--bonfire-line);
+  --basic-ui-focus: 2px solid var(--text-accent);
+}
+
+body .writer-v8-home .writer-v8-home-hero .writer-v8-home-heading h2 {
+  color: var(--writer-v8-home-title-color, var(--bonfire-heading));
+  font-size: clamp(1.8rem, 4.1cqi, 2.65rem);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+body.is-mobile .writer-v8-home .writer-v8-home-hero .writer-v8-home-heading h2 {
+  font-size: clamp(1.8rem, 6.6cqi, 2.5rem);
+}
+
+body:not(.bonfire-plain-headings) .writer-v8-home .writer-v8-home-hero .writer-v8-home-heading h2 {
+  font-family: var(--bonfire-label-font);
+  font-weight: 400;
+}
+
+body .writer-v8-home .writer-v8-home-hero .writer-v8-home-heading .writer-v8-home-title-icon {
+  flex-basis: 2.5rem;
+  inline-size: 2.5rem;
+  min-inline-size: 2.5rem;
+  block-size: 2.5rem;
+  min-block-size: 2.5rem;
+}
+
+body .writer-v8-home .writer-v8-home-hero .writer-v8-home-heading .writer-v8-home-title-icon svg {
+  inline-size: 1.85rem;
+  block-size: 1.85rem;
+}
+
+/* A small ink stroke is a signature, not another card outline. */
+body:not(.bonfire-no-sketch) .writer-v8-home .writer-v8-home-hero .writer-v8-home-heading h2::after {
+  content: "";
+  display: block;
+  inline-size: min(39%, 3.6rem);
+  block-size: 0.13rem;
+  margin: 0.1em auto 0;
+  border-radius: 75% 30% 60% 35%;
+  background: currentColor;
+  opacity: 0.72;
+  transform: rotate(-3deg);
+  pointer-events: none;
+}
+
+body:not(.bonfire-plain-headings) :is(
+  .writer-v8-home .writer-v8-home-card-header h3,
+  .writer-v931-pomodoro > h3,
+  .writer-v931-pomodoro .writer-v101-focus-summary > h4,
+  .writer-v8-chat .writer-v8-chat-title,
+  .markdown-preview-view .writer-another-name,
+  .callout:is([data-callout="scene"], [data-callout="cena"], [data-callout="character"],
+    [data-callout="personagem"], [data-callout="revision"], [data-callout="revisao"]) .callout-title-inner
+) {
+  font-family: var(--bonfire-label-font);
+  font-weight: 400;
+  font-size: max(1em, 1.125rem);
+  line-height: 1.35;
+}
+
+body:not(.bonfire-plain-headings) .writer-v8-home :is(
+  .writer-v903-widgets-toolbar > strong,
+  .writer-v903-widget-add > span:last-child,
+  .writer-v8-home-quick-actions > .writer-v8-home-action > span:last-child
+) {
+  font-family: var(--bonfire-label-font);
+  font-size: max(1em, 1rem);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+body:not(.bonfire-plain-headings) .writer-v8-home .writer-v903-widgets-toolbar > strong {
+  color: var(--bonfire-heading);
+}
+
+body:not(.bonfire-no-sketch) .writer-v8-home .writer-v8-home-quick-actions > .writer-v8-home-action {
+  border-radius: var(--bonfire-sketch-radius);
+}
+
+body .writer-v8-home .writer-v8-home-title-icon {
+  color: var(--writer-v8-home-icon-color, var(--bonfire-heading));
+}
+
+/* Keep the Basic hierarchy in spacing and fills, not nested outlines. */
+body .writer-v8-home {
+  --basic-ui-bg: var(--bonfire-canvas);
+  --basic-ui-surface: var(--bonfire-panel);
+  background-color: var(--bonfire-canvas);
+}
+
+body .writer-v8-home .writer-v8-home-hero {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body :is(.writer-v8-home .writer-v8-home-card, .writer-companion-center .writer-companion-card) {
+  background: var(--bonfire-card);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+body:not(.bonfire-no-sketch) .writer-v8-home .writer-v901-home-search-card {
+  border-radius: var(--bonfire-sketch-radius);
+}
+
+body .writer-companion-center > h2 {
+  color: var(--bonfire-heading);
+}
+
+body .writer-v8-home .writer-v8-home-quick-actions > .writer-v8-home-action {
+  background: var(--bonfire-panel);
+  border-color: transparent;
+  color: var(--text-normal);
+}
+
+body .writer-v8-home .writer-v8-home-quick-actions > .writer-v8-home-action:hover {
+  background: var(--interactive-hover);
+}
+
+/* Basic 13.15.0 renders Continue book as the second quick action. */
+body .writer-v8-home .writer-v8-home-quick-actions > .writer-v8-home-action:nth-child(2) {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+body .writer-v8-home .writer-v8-home-quick-actions > .writer-v8-home-action:nth-child(2):hover {
+  background: var(--interactive-accent-hover);
+  color: var(--text-on-accent);
+}
+
+body .writer-v8-home
+  :is(.writer-v905-note-row, .writer-v901-home-result).is-selected {
+  background: var(--bonfire-selection);
+  border-color: transparent;
+  box-shadow: inset 2px 0 var(--interactive-accent);
+}
+
+body .writer-v8-home :is(.writer-v905-note-filter, .writer-v8-home-search) {
+  background-color: var(--bonfire-field);
+  border-color: var(--bonfire-control-border);
+  color: var(--text-normal);
+}
+
+.writer-v8-home .writer-v8-home-card-header h3,
+.dictionary-settings-panel > :is(h3, h4) {
+  color: var(--bonfire-heading);
+}
+
+body :is(.writer-tool-tabs, .writer-project-tabs, .dictionary-settings-tabs, .dictionary-settings-subtabs)
+  > button:is(.is-active, [aria-selected="true"], [aria-pressed="true"]) {
+  color: var(--text-accent);
+  border-color: transparent;
+}
+
+body :is(.writer-tool-root, .writer-project-root, .dictionary-settings-panel, .writer-v9-space-sidebar)
+  :is(.writer-tool-tabs.writer-tool-tabs, .writer-project-tabs, .dictionary-settings-tabs, .dictionary-settings-subtabs, .writer-v9-space-side-nav)
+  > button:is(.is-active, [aria-selected="true"], [aria-pressed="true"]) {
+  background-color: var(--bonfire-selection);
+}
+
+body :is(.writer-tool-root, .writer-tools-v3, .writer-project-root, .dictionary-settings-panel,
+    .writer-v931-pomodoro, .writer-v10-bookshelf)
+  :is(input[type="text"], input[type="search"], input[type="url"], select, textarea):not([disabled]) {
+  border-color: var(--bonfire-control-border);
+}
+
+body .writer-v931-pomodoro .writer-v101-focus-summary:not(:empty) {
+  padding: 0.7rem 0.75rem;
+  border: 0;
+  border-radius: var(--radius-m);
+  background: var(--bonfire-card);
+}
+
+.writer-v931-pomodoro .writer-v101-focus-summary > h4 {
+  margin-block: 0 0.35rem;
+}
+
+.writer-v931-pomodoro .writer-v101-focus-summary .writer-v101-focus-bars {
+  height: clamp(44px, 12vh, 68px);
+}
+
+body .writer-v931-pomodoro .writer-v931-pomodoro-clock {
+  color: var(--text-normal);
+  font-variant-numeric: tabular-nums;
+}
+
+body .writer-v931-pomodoro :is(.writer-v931-pomodoro-control, .writer-v931-pomodoro-modes button) {
+  border-color: transparent;
+}
+
+body .writer-v931-pomodoro .writer-v931-pomodoro-modes button.is-active {
+  background: var(--bonfire-selection);
+  border-color: transparent;
+  color: var(--text-accent);
+}
+
+body .writer-v931-pomodoro .writer-v931-pomodoro-progress {
+  accent-color: var(--interactive-accent);
+  background: var(--bonfire-field);
+  border: 1px solid var(--bonfire-control-border);
+  border-radius: var(--radius-s);
+  overflow: hidden;
+}
+
+body .writer-v931-pomodoro .writer-v931-pomodoro-progress::-webkit-progress-bar {
+  background: var(--bonfire-field);
+}
+
+body .writer-v931-pomodoro .writer-v931-pomodoro-progress::-webkit-progress-value {
+  background: var(--interactive-accent);
+}
+
+/* Rebase the original dialogue/post colors without overriding custom bubble
+   options or assigning notebook paragraph formatting to rendered widgets. */
+body .writer-v8-chat:not([class*="is-chat-bubble-"]) {
+  --writer-v102-bubble-background: var(--bonfire-story-surface);
+}
+
+body .writer-v8-chat:not(.is-bubbles-square, .is-bubbles-round)
+  .writer-v8-chat-row:not([class*="is-bubble-color-"]) .writer-v8-chat-bubble {
+  border-color: var(--bonfire-story-border);
+}
+
+body .writer-v8-social .writer-v8-social-post:not(.is-reply) {
+  background-color: var(--bonfire-story-surface);
+}
+
+body .writer-v8-social .writer-v8-social-post.is-reply {
+  border-inline-start-color: var(--bonfire-story-border);
+}
+
+.markdown-preview-view :is(.writer-v8-chat, .writer-v8-social, .writer-v8-media-gallery,
+  .writer-v95-timeline, .writer-v8-block) {
+  break-inside: avoid-column;
+  min-width: 0;
+}
+
+.markdown-preview-view :is(.writer-v8-chat-bubble, .writer-v8-chat-transcript-text,
+  .writer-v8-social-body, .writer-v95-timeline-content) p:not([align], .writer-v102-align-processed) {
+  text-indent: 0;
+  hyphens: manual;
+}
+
+:is(.writer-v8-chat, .writer-v8-social, .writer-v8-media-gallery, .writer-v10-bookshelf, .writer-v92-preview-shell) img {
+  margin-block: 0;
+}
+
+.markdown-source-view .cm-line:is(.writer-v102-align-left, .writer-v102-align-center,
+  .writer-v102-align-right, .writer-v102-align-justify) {
+  text-indent: 0;
+}
+
+/* Keep Basic's explicit per-Space concealment distinct from visual styling. */
+.workspace-leaf-content[data-type="file-explorer"] :is(.nav-file, .nav-folder, .tree-item).writer-v91-flex-hidden {
+  display: none !important;
+}
+
+/* Use the space already granted by the app. Keep Basic's controls and
+   positions intact and make hover/focus states easier to spot. */
+body :is(.status-bar, .writer-mobile-status:not([hidden])) {
+  background-color: var(--bonfire-panel);
+  border-color: transparent;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+body :is(.status-bar, .writer-mobile-status:not([hidden]))
+  :is(button, .status-bar-item.plugin-editor-status):is(:hover, :focus-visible) {
+  background-color: var(--bonfire-card);
+  color: var(--text-normal);
+  border-radius: var(--radius-s);
+}
+
+body.is-mobile .writer-mobile-status:not([hidden]) .writer-mobile-status-item {
+  min-inline-size: 0;
+}
+
+:is(.writer-v132-status-host, .writer-mobile-status)
+  :is(.writer-v91-sound-status, .writer-v1010-width-status) input[type="range"] {
+  accent-color: var(--interactive-accent);
+}

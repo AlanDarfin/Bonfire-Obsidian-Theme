@@ -1,0 +1,353 @@
+/* Adapted from Alan Darfin's Basic-Compat-Unificado-v2.
+   Keep editorial rules inside actual notes, not on body or plugin widgets. */
+
+:is(.markdown-preview-view, .markdown-source-view).document--no-title .inline-title,
+:is(.markdown-preview-view, .markdown-source-view).document--no-bar .inline-header {
+  display: none;
+}
+
+.NoBorder {
+  --table-border-width: 0px;
+  --table-white-space: normal;
+  --table-header-border-width: 0px;
+  --table-column-first-border-width: 0px;
+  --table-column-last-border-width: 0px;
+  --table-row-last-border-width: 0px;
+}
+
+.markdown-rendered :is(.font, .bonfire-sketch) {
+  font-family: var(--bonfire-label-font);
+}
+
+/* Actual Markdown heading nodes, including centered Basic headings and
+   subsections. Do not restyle widget headings or editor controls here. */
+body:not(.bonfire-plain-headings) .markdown-preview-view .markdown-preview-sizer
+  > :is(.el-h1, .el-h2, .el-h3, .el-h4, .el-h5, .el-h6) > :is(h1, h2, h3, h4, h5, h6),
+body:not(.bonfire-plain-headings) .markdown-source-view.mod-cm6.is-live-preview
+  .cm-line:is(.HyperMD-header-1, .HyperMD-header-2, .HyperMD-header-3, .HyperMD-header-4, .HyperMD-header-5, .HyperMD-header-6) {
+  font-family: var(--bonfire-display-font);
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+body:not(.bonfire-plain-headings) .markdown-preview-view .markdown-preview-sizer
+  > :is(.el-h5, .el-h6) > :is(h5, h6),
+body:not(.bonfire-plain-headings) .markdown-source-view.mod-cm6.is-live-preview
+  .cm-line:is(.HyperMD-header-5, .HyperMD-header-6) {
+  font-family: var(--bonfire-label-font);
+}
+
+body:not(.bonfire-plain-prose) .markdown-preview-view .markdown-preview-sizer
+  > :is(.el-p > p, .el-blockquote > blockquote) {
+  font-family: var(--bonfire-prose-font);
+}
+
+:is(.markdown-reading-view, .markdown-preview-view, .markdown-source-view)
+  :is(.writer-another-name, .another-name, .inline-subtitle, .note-subtitle) {
+  color: var(--text-muted);
+  text-align: center;
+  text-indent: 0;
+  overflow-wrap: anywhere;
+}
+
+:is(body.bonfire-literary-notes .markdown-preview-view, .markdown-preview-view.bonfire-manuscript)
+  .markdown-preview-sizer > .el-p > p:not([align], .writer-v102-align-processed) {
+  text-align: justify;
+  text-indent: 1.4em;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  orphans: 2;
+  widows: 2;
+}
+
+.markdown-preview-view.bonfire-manuscript .inline-title {
+  text-align: center;
+}
+
+.markdown-preview-view.bonfire-manuscript .markdown-preview-sizer
+  > :is(.el-h1, .el-h2, .el-h3, .el-h4, .el-h5, .el-h6)
+  > :is(h1, h2, h3, h4, h5, h6):not([align], .writer-v102-align-processed) {
+  text-align: center;
+}
+
+.markdown-preview-view.dropcap .markdown-preview-sizer
+  > :nth-child(1 of .el-p) > p:not([align], .writer-v102-align-processed) {
+  text-indent: 0;
+}
+
+.markdown-preview-view.dropcap .markdown-preview-sizer
+  > :nth-child(1 of .el-p) > p:not([align], .writer-v102-align-processed)::first-letter {
+  float: inline-start;
+  margin-inline-end: 0.1em;
+  font: 3.25em / 0.92 var(--bonfire-prose-font);
+  color: var(--bonfire-heading);
+}
+
+.markdown-preview-view .markdown-preview-sizer > .el-p > p img {
+  max-inline-size: 100%;
+  margin-block: 0.4em 0.15em;
+}
+
+.markdown-preview-view .markdown-preview-sizer > .el-p > p img[alt~="center"] {
+  display: block;
+  margin-inline: auto;
+}
+
+body:not(.is-mobile) .markdown-preview-view .markdown-preview-sizer > .el-p > p img[alt~="right"] {
+  float: inline-end;
+  max-inline-size: min(55%, 24rem);
+  margin-inline-start: 1rem;
+}
+
+body.is-mobile .markdown-preview-view .markdown-preview-sizer > .el-p > p img[alt~="right"] {
+  display: block;
+  margin-inline: auto;
+}
+
+.markdown-preview-view.canvas img[alt~="canvas-top"],
+.canvas-node-content .markdown-preview-view img[alt~="canvas-top"] {
+  display: block;
+  width: calc(100% + 2 * var(--size-4-4, 16px));
+  max-width: none;
+  margin-inline: calc(-1 * var(--size-4-4, 16px));
+  object-fit: cover;
+}
+
+/* Legacy paired rules remain available in Reading view. Never columnize an
+   editable CM6 surface or a narrow mobile drawer. */
+@media (min-width: 900px) {
+  body:not(.is-mobile) .markdown-preview-view.bonfire-columns .markdown-preview-sizer:has(> .el-hr + .el-hr + :not(.mod-footer)),
+  body:not(.is-mobile) .markdown-preview-view.bonfire-columns .callout-content:has(> hr + hr + *) {
+    columns: 2 17rem;
+    column-gap: 2rem;
+    column-rule: 1px solid var(--bonfire-line);
+  }
+
+  body:not(.is-mobile) .markdown-preview-view.bonfire-columns .markdown-preview-sizer
+    :is(.mod-header, .mod-footer, .frontmatter-container) {
+    column-span: all;
+  }
+
+  body:not(.is-mobile) .markdown-preview-view.bonfire-columns
+    :is(.markdown-preview-sizer > .el-hr:has(+ .el-hr), .callout-content > hr:has(+ hr)) {
+    display: none;
+  }
+
+  body:not(.is-mobile) .markdown-preview-view.bonfire-columns
+    :is(.markdown-preview-sizer > .el-hr + .el-hr, .callout-content > hr + hr) {
+    break-after: column;
+    opacity: 0;
+    margin-block: 0;
+  }
+}
+
+/* Legacy community blocks keep their identity without hard-coded dark colors. */
+.markdown-rendered :is(.post, .chat-view-message, .dialogue-plugin-message, ul.yesterday-dialog li.their-dialog .dialog-statement) {
+  --bonfire-legacy-surface: var(--bonfire-story-surface, var(--background-primary-alt));
+  background-color: var(--bonfire-legacy-surface);
+  border-color: var(--bonfire-story-border, var(--background-modifier-border));
+  color: var(--text-normal);
+}
+
+.markdown-rendered :is(.post, .chat-view-message) {
+  border-style: solid;
+  border-width: 1px;
+}
+
+.markdown-rendered .chat-view-message {
+  padding: 0.65rem 0.8rem;
+  border-radius: var(--radius-m);
+  max-inline-size: 90%;
+}
+
+.markdown-rendered .chat-view-message-left { align-self: flex-start; }
+.markdown-rendered .chat-view-message-right { align-self: flex-end; }
+
+.markdown-rendered .chat-view-body :is(p, h2, h3, h4, h5, h6) {
+  margin-block: 0 0.35em;
+  text-align: start;
+  text-indent: 0;
+}
+
+.markdown-rendered .chat-view-comment {
+  max-inline-size: 90%;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.markdown-rendered .dialogue-plugin-message-title {
+  background-color: var(--background-secondary);
+  padding: 0.3rem 0.6rem;
+}
+
+.markdown-rendered .dialogue-plugin-delimiter-dot,
+.markdown-rendered :is(.tlv-marker, .tlv-span) {
+  background-color: var(--interactive-accent);
+}
+
+.markdown-rendered .tlv-years { color: var(--text-normal); }
+.markdown-rendered .tlv-timeline-highlight { background-color: var(--background-modifier-hover); }
+.markdown-rendered .timeline.active-color-text-accent { --timeline-active-color: var(--text-accent); }
+.markdown-rendered :is(.timeline.body-3 .description, .image-captions-figure, .image-captions-caption) {
+  background-color: var(--background-primary-alt);
+}
+
+/* Minimal-inspired, explicitly opted into per note. Pair images on one line,
+   and start a new paragraph for the next row. Keep the entire image visible. */
+.markdown-preview-view.bonfire-wide {
+  --file-line-width: 92ch;
+}
+
+/* Minimal-inspired per-note measure. It changes only the reading column,
+   keeping document actions, pane edges and the editor in place. */
+.markdown-preview-view.bonfire-quiet {
+  --file-line-width: 64ch;
+}
+
+.markdown-preview-view.bonfire-quiet .markdown-preview-sizer {
+  max-inline-size: min(100%, 64ch);
+  margin-inline: auto;
+}
+
+/* Reading tables, not interactive tables from plugins. Keep the native
+   table structure and focus behavior on links and typed values. */
+.markdown-preview-view.bonfire-tables .markdown-preview-sizer
+  > .el-table :is(thead th, tbody td) {
+  font-variant-numeric: tabular-nums;
+  border-inline-color: transparent;
+  border-block-color: transparent;
+}
+
+.markdown-preview-view.bonfire-tables .markdown-preview-sizer
+  > .el-table thead th {
+  color: var(--text-accent);
+  background-color: var(--bonfire-card);
+}
+
+.markdown-preview-view.bonfire-tables .markdown-preview-sizer
+  > .el-table tbody > tr:nth-child(even) > td {
+  background-color: var(--bonfire-panel);
+}
+
+.markdown-preview-view.bonfire-tables .markdown-preview-sizer
+  > .el-table tbody > tr:focus-within > td {
+  background-color: var(--bonfire-selection);
+}
+
+@media (hover: hover) {
+  .markdown-preview-view.bonfire-tables .markdown-preview-sizer
+    > .el-table tbody > tr:hover > td {
+    background-color: var(--bonfire-selection);
+  }
+}
+
+/* Keep tags as Obsidian links. Scope the badge treatment to specific notes,
+   so it cannot restyle properties, search results, or Basic widgets. */
+.markdown-preview-view.bonfire-labels .markdown-preview-sizer > .el-p a.tag {
+  color: var(--text-accent);
+  background-color: var(--bonfire-card);
+  text-decoration: none;
+  border: 0;
+  border-radius: var(--radius-m);
+  padding-inline: 0.48em;
+  padding-block: 0.09em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.markdown-preview-view.bonfire-labels .markdown-preview-sizer > .el-p a.tag:is(:hover, :focus-visible) {
+  background-color: var(--bonfire-selection);
+  text-decoration: underline;
+  text-underline-offset: 0.17em;
+}
+
+.markdown-preview-view.bonfire-image-grid .markdown-preview-sizer > .el-p
+  > p:has(> :is(.image-embed, img) + :is(.image-embed, img)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+  align-items: start;
+  gap: 0.65rem;
+  text-indent: 0;
+}
+
+.markdown-preview-view.bonfire-image-grid .markdown-preview-sizer > .el-p
+  > p:has(> :is(.image-embed, img) + :is(.image-embed, img)) > :is(.image-embed, img) {
+  display: block;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  margin: 0;
+}
+
+.markdown-preview-view.bonfire-image-grid .markdown-preview-sizer > .el-p
+  > p:has(> :is(.image-embed, img) + :is(.image-embed, img)) :is(.image-embed > img, img) {
+  inline-size: 100%;
+  block-size: auto;
+  object-fit: contain;
+}
+
+/* Fancy-a-Story-inspired literary containers. Use Obsidian's existing
+   callout semantics, folding, and icon rendering. */
+.callout:is([data-callout="carta"], [data-callout="letter"]) {
+  --callout-icon: lucide-mail;
+  --callout-color: 143, 80, 39;
+  border-block-end-style: double;
+  border-block-end-width: 3px;
+}
+
+.callout:is([data-callout="pista"], [data-callout="clue"]) {
+  --callout-icon: lucide-search;
+  --callout-color: 129, 52, 72;
+  border-inline-start-width: 3px;
+}
+
+.callout:is([data-callout="rascunho"], [data-callout="draft"]) {
+  --callout-icon: lucide-file-pen-line;
+  --callout-color: 61, 103, 77;
+  border-style: dashed;
+}
+
+.theme-dark .callout:is([data-callout="carta"], [data-callout="letter"]) { --callout-color: 232, 181, 111; }
+.theme-dark .callout:is([data-callout="pista"], [data-callout="clue"]) { --callout-color: 229, 156, 177; }
+.theme-dark .callout:is([data-callout="rascunho"], [data-callout="draft"]) { --callout-color: 168, 204, 172; }
+
+body:not(.bonfire-plain-headings) .callout:is([data-callout="carta"], [data-callout="letter"],
+    [data-callout="pista"], [data-callout="clue"], [data-callout="rascunho"], [data-callout="draft"])
+  .callout-title-inner {
+  font-family: var(--bonfire-label-font);
+  font-size: 1.12em;
+}
+
+/* Things-inspired task rows. The small handwritten signs are decorative,
+   while the native task control keeps its semantics and tap target. */
+.markdown-preview-view.bonfire-task-cards .markdown-preview-sizer
+  > .el-ul > ul > li.task-list-item {
+  padding-block: 0.35em;
+  padding-inline-end: 0.45em;
+  overflow-wrap: anywhere;
+}
+
+.markdown-preview-view.bonfire-task-cards .markdown-preview-sizer
+  > .el-ul > ul > li.task-list-item:is([data-task="!"], [data-task="?"], [data-task=">"], [data-task="/"]) {
+  position: relative;
+  padding-inline-end: 2.2em;
+  color: var(--text-normal);
+  text-decoration: none;
+  background-color: var(--background-primary-alt);
+  border-radius: var(--radius-s);
+}
+
+.markdown-preview-view.bonfire-task-cards .markdown-preview-sizer
+  > .el-ul > ul > li.task-list-item:is([data-task="!"], [data-task="?"], [data-task=">"], [data-task="/"])::after {
+  content: attr(data-task) / "";
+  position: absolute;
+  inset-block-start: 0.2em;
+  inset-inline-end: 0.65em;
+  color: var(--text-accent);
+  font: 400 1.2em / 1.2 var(--bonfire-label-font);
+  pointer-events: none;
+}
+
+.markdown-preview-view.bonfire-task-cards .markdown-preview-sizer
+  > .el-ul > ul > li.task-list-item:is([data-task="x"], [data-task="X"], [data-task="-"]) {
+  color: var(--text-muted);
+}
